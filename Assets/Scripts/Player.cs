@@ -7,10 +7,8 @@ public class Player : MonoBehaviour
     public float senX;
     public float senY;
 
-    public Transform orientacion;
-
+    public Transform playerBody;
     float xRotation;
-    float yRotation;
 
     private void Start()
     {
@@ -22,13 +20,11 @@ public class Player : MonoBehaviour
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * senX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * senY;
 
-        yRotation += mouseX;
-
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
 
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientacion.rotation = Quaternion.Euler(0, yRotation, 0);
+        transform.localRotation = Quaternion.Euler(xRotation, 0.0f, 0.0f);
+        playerBody.Rotate(Vector3.up * mouseX);
 
     }
 
