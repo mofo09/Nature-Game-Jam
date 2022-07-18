@@ -1,8 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-    <Style src="project://database/Assets/playbutton.uss?fileID=7433441132597879392&amp;guid=f8af1f3c96483374da257cbd21498d2c&amp;type=3#playbutton" />
-    <ui:VisualElement style="flex-grow: 1; flex-shrink: 0; justify-content: center; align-items: stretch; flex-direction: column; margin-left: 20%; margin-right: 20%; margin-top: 5%; margin-bottom: 5%;">
-        <ui:Button text="Start" display-tooltip-when-elided="true" name="StartButton" class="Buttonplease" style="font-size: 25px; max-height: 30%;" />
-        <ui:Button text="Credits" display-tooltip-when-elided="true" name="Credits" class="Buttonplease" style="flex-grow: 1; flex-shrink: 0; max-height: 15%;" />
-        <ui:Button text="Settings" display-tooltip-when-elided="true" name="Settings" class="Buttonplease" style="flex-grow: 1; max-height: 15%;" />
-    </ui:VisualElement>
-</ui:UXML>
