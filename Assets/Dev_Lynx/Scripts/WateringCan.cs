@@ -66,7 +66,7 @@ public class WateringCan : MonoBehaviour
 
         private void ShootWater() {
             currentWater -= waterProjectileSetAmount;
-            Instantiate(waterPrefab, barrelPoint.position, Quaternion.identity);
+            Instantiate(waterPrefab, barrelPoint.position, barrelPoint.rotation);
             Debug.Log("Firing water! There is " + currentWater + " water left.");
             OnWaterProjectile.Invoke();
         }

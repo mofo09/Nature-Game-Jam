@@ -5,7 +5,8 @@ public class SeedProjectile : MonoBehaviour
 {
         #region Variables
 
-        [Header("Projectile Variable Fields")]
+        [Header("Projectile Variable Fields - Seed")]
+        [SerializeField] GameObject plantToGrow;
         [SerializeField] float projectileSpeed;
 
         Rigidbody rb;
@@ -16,16 +17,13 @@ public class SeedProjectile : MonoBehaviour
 
         void Start() {
             rb = GetComponent<Rigidbody>();
-        }
-
-        private void FixedUpdate() {
-            rb.velocity = gameObject.transform.forward * projectileSpeed;
+            rb.AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
         }
 
         private void OnCollisionEnter(Collision collision) {
 
             if(collision.gameObject.tag == "Wall") {
-                StartCoroutine(StickToWall());
+                rb.isKinematic = true;
             }
             
         }
@@ -34,16 +32,18 @@ public class SeedProjectile : MonoBehaviour
 
         #region Private Methods
 
-        private IEnumerator StickToWall() {
-            yield return new WaitForSeconds(0.0005f);
-            rb.isKinematic = true;
-        }
         
+
         #endregion
 
         #region Public Methods
 
-
+        public void GrowPlant() {
+            if(plantToGrow != null){
+            GameObject plantPrefab = Instantiate(plantToGrow, transform.position, Quaternion.identity);
+            }
+            Destroy(gameObject);
+        }
 
         #endregion
 }
