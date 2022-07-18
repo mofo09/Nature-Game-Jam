@@ -7,6 +7,7 @@ public class EnemyAi : MonoBehaviour
     public NavMeshAgent agent;
 
     public Transform player;
+    public PlayerMovement pla;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -87,6 +88,11 @@ public class EnemyAi : MonoBehaviour
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
+
+            if (player)
+            {
+                pla.TakeDamage(50);
+            }
         }
     }
     private void ResetAttack()
