@@ -11,8 +11,8 @@ public class WateringCan : MonoBehaviour
         [SerializeField] int startingWater; //If we decide to not start the player at max water on startup
         [SerializeField] int waterProjectileSetAmount;
 
-        int maxWater = 100; 
-        int currentWater;
+        [HideInInspector] public int maxWater = 100; 
+        [HideInInspector] public int currentWater;
         bool waterInput;
         bool seedInput;
 
@@ -43,6 +43,7 @@ public class WateringCan : MonoBehaviour
 
         void Update() {
             HandleShooting();
+            HandleReload();
             currentWater = Mathf.Clamp(currentWater, 0, maxWater);
         }
 
@@ -63,6 +64,13 @@ public class WateringCan : MonoBehaviour
                 ShootSeed();
             }         
     }
+
+        private void HandleReload() {
+            if(Input.GetKeyDown(KeyCode.X)) {
+                ReloadSeed();
+            }
+        }
+
 
         private void ShootWater() {
             currentWater -= waterProjectileSetAmount;
@@ -90,17 +98,15 @@ public class WateringCan : MonoBehaviour
             currentSeedData = seeds[currentSeed];
         }
 
+        private void ReloadSeed() {
+            currentSeedData.Reload();
+        }
+
         #endregion
 
         #region Public Methods
 
-        public void PickUpSeed(int seedsToAdd, string seedType) {
-            Seed seedInList = seeds.Find( seeds => seeds.seedType == seedType);
-
-            if(seedInList != null) {
-                seedInList.AddToStash(seedsToAdd);
-            }
-        }
+        
 
         #endregion
 }
