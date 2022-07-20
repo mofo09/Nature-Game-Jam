@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 12.0f;
     public float gravity = -9.81f;
     public float jump = 3.0f;
+    public float jumpBoost = 30.0f;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -39,4 +40,5 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
 }
