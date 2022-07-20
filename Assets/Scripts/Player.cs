@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public float senY;
 
     public Transform playerBody;
+    public Transform wateringCan;
     float xRotation;
 
     private void Start()
@@ -24,6 +25,11 @@ public class Player : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0.0f, 0.0f);
+
+        if(wateringCan != null) {
+        wateringCan.localRotation = transform.localRotation;
+        }
+        
         playerBody.Rotate(Vector3.up * mouseX);
 
     }
