@@ -3,10 +3,6 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Wall
-  - JumpPad
-  - Ground
   layers:
   - Default
   - TransparentFX
@@ -15,7 +11,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - Wall
+  - 
   - 
   - 
   - 
