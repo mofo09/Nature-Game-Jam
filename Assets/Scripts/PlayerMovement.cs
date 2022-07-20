@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    public float health = 100;
     public float speed = 12.0f;
     public float gravity = -9.81f;
     public float jump = 3.0f;
@@ -39,4 +40,16 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0) Invoke(nameof(DestroyPlayer), 0.5f);
+    }
+    private void DestroyPlayer()
+    {
+        Destroy(gameObject);
+    }
+
 }
