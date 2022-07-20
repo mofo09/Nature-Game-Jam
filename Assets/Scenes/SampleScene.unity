@@ -181,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 320967472}
   player: {fileID: 1515400157}
-  pla: {fileID: 0}
+  pla: {fileID: 1515400158}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
