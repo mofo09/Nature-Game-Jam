@@ -844,6 +844,7 @@ MonoBehaviour:
   senX: 1000
   senY: 1000
   playerBody: {fileID: 885918582}
+  wateringCan: {fileID: 0}
 --- !u!114 &1333158351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,6 +978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1515400159}
+  health: 100
   speed: 12
   gravity: -9.81
   jump: 3
@@ -1104,6 +1106,7 @@ MonoBehaviour:
   senX: 600
   senY: 600
   playerBody: {fileID: 1515400157}
+  wateringCan: {fileID: 0}
 --- !u!114 &1709839911
 MonoBehaviour:
   m_ObjectHideFlags: 0
