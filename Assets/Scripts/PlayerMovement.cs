@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 12.0f;
     public float gravity = -9.81f;
     public float jump = 3.0f;
+    public float jumpBoost = 30.0f;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -50,6 +51,21 @@ public class PlayerMovement : MonoBehaviour
     private void DestroyPlayer()
     {
         Destroy(gameObject);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        switch(hit.gameObject.tag)
+        {
+            case "JumpPad":
+                jump = jumpBoost;
+                break;
+            case "Ground":
+                jump = 3.0f;
+                break;
+        }
+
+
     }
 
 }
