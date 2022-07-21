@@ -15,12 +15,6 @@ public class WaterProjectile : MonoBehaviour
         #endregion
 
         #region MonoBehaviour Callbacks
-
-        void Start() {
-            rb = GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
-        }
-
         void OnCollisionEnter(Collision collision) {
             if(collision.gameObject.CompareTag("Wall")) {
                 WaterExplosion();
