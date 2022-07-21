@@ -23,14 +23,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390622682006889769}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.494, y: 0, z: 0.328}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4421692718554495436}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &638650356250733968
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
-  jumpHeight: 30
+  jumpHeight: 25
   groundCheck: {fileID: 638650358253737470}
   ground:
     serializedVersion: 2
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a82fbf90ecdf4e49a0c840cdd79ba86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDistance: 20
+  interactionDistance: 2
   cam: {fileID: 638650358326363957}
   interactionText: {fileID: 0}
 --- !u!1 &638650356686550788
@@ -558,6 +558,7 @@ MonoBehaviour:
   senX: 1500
   senY: 1500
   playerBody: {fileID: 638650356250733970}
+  wateringCan: {fileID: 189746173772429164}
 --- !u!1 &5692866917523593361
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5692866917523593361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.325, z: 0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -607,15 +608,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 290cbb7d73d55cf4cafc37987929d4e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.425
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 290cbb7d73d55cf4cafc37987929d4e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.14999998
+      value: -0.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 290cbb7d73d55cf4cafc37987929d4e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.85
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 290cbb7d73d55cf4cafc37987929d4e7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -672,9 +673,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38be8ad115571994a81d29b869e79079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 638650358326363957}
   barrelPoint: {fileID: 3321469079036861234}
-  startingWater: 0
-  waterProjectileSetAmount: 10
+  projectileSpeed: 20
   seeds:
   - {fileID: 11400000, guid: 9db78e534032ca748979e3f897c29474, type: 2}
   OnSeedProjectile:
@@ -685,6 +686,10 @@ MonoBehaviour:
   OnWaterProjectile:
     m_PersistentCalls:
       m_Calls: []
+  startingWater: 0
+  waterProjectileSetAmount: 10
+  maxWater: 100
+  currentWater: 0
 --- !u!4 &4421692718554495436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 290cbb7d73d55cf4cafc37987929d4e7, type: 3}

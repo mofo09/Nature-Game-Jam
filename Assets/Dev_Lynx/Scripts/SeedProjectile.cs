@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SeedProjectile : MonoBehaviour
 {
@@ -7,23 +8,33 @@ public class SeedProjectile : MonoBehaviour
 
         [Header("Projectile Variable Fields - Seed")]
         [SerializeField] GameObject plantToGrow;
-        [SerializeField] float projectileSpeed;
 
         Rigidbody rb;
+
+        [Header("Raycast Variable Fields")]
+        [SerializeField] float sphereRadius;
+        [SerializeField] LayerMask layerMask;
+
+        float maxDistance = 2f;
+        float currentHitDistance;
+        Vector3 origin;
+        Vector3 direction;
+        Vector3 spawnPosition;
+        Quaternion spawnRotation;
 
         #endregion
 
         #region MonoBehaviour Callbacks
 
-        void Start() {
+        private void Start() {
             rb = GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
         }
 
         private void OnCollisionEnter(Collision collision) {
 
             if(collision.gameObject.tag == "Wall") {
                 rb.isKinematic = true;
+                spawnRotation = Quaternion.LookRotation(collision.contacts[0].normal);
             }
             
         }
@@ -32,7 +43,10 @@ public class SeedProjectile : MonoBehaviour
 
         #region Private Methods
 
-        
+        private void OnDrawGizmosSelected() {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(origin + direction * currentHitDistance, sphereRadius);
+        }
 
         #endregion
 
@@ -40,7 +54,7 @@ public class SeedProjectile : MonoBehaviour
 
         public void GrowPlant() {
             if(plantToGrow != null){
-            GameObject plantPrefab = Instantiate(plantToGrow, transform.position, Quaternion.identity);
+            GameObject plantPrefab = Instantiate(plantToGrow, transform.position, spawnRotation) as GameObject;
             }
             Destroy(gameObject);
         }

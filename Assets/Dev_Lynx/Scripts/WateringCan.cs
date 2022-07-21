@@ -7,12 +7,11 @@ public class WateringCan : MonoBehaviour
         #region Variables
 
         [Header("Watering Can - General Variables")]
+        [SerializeField] Camera cam;
         [SerializeField] Transform barrelPoint;
-        [SerializeField] int startingWater; //If we decide to not start the player at max water on startup
-        [SerializeField] int waterProjectileSetAmount;
+        [SerializeField] float projectileSpeed;
 
-        [HideInInspector] public int maxWater = 100; 
-        [HideInInspector] public int currentWater;
+        Vector3 destination;
         bool waterInput;
         bool seedInput;
 
@@ -28,6 +27,11 @@ public class WateringCan : MonoBehaviour
         [Header("Watering Can - Water")]
         [SerializeField] GameObject waterPrefab;
         [SerializeField] UnityEvent OnWaterProjectile;
+        [SerializeField] int startingWater; //If we decide to not start the player at max water on startup
+        [SerializeField] int waterProjectileSetAmount;
+
+        [HideInInspector] public int maxWater = 100; 
+        [HideInInspector] public int currentWater;
 
         #endregion
 
@@ -56,12 +60,19 @@ public class WateringCan : MonoBehaviour
             seedInput = Input.GetButtonDown("Fire2");
             
             if(waterInput && canShootWater()) {
-                ShootWater();
+                ShootProjectile(waterPrefab);
+                currentWater -= waterProjectileSetAmount;
+                OnWaterProjectile.Invoke();
+
+                //Debug.Log("Firing water! There is " + currentWater + " water left.");
             }
 
        
             if(seedInput && canShootSeed()) {
-                ShootSeed();
+                ShootProjectile(currentSeedData.seedPrefab);
+                OnSeedProjectile.Invoke(); 
+
+                //Debug.Log("Firing seed!");
             }         
     }
 
@@ -71,26 +82,26 @@ public class WateringCan : MonoBehaviour
             }
         }
 
-
-        private void ShootWater() {
-            currentWater -= waterProjectileSetAmount;
-            Instantiate(waterPrefab, barrelPoint.position, barrelPoint.rotation);
-            Debug.Log("Firing water! There is " + currentWater + " water left.");
-            OnWaterProjectile.Invoke();
-        }
-
         private bool canShootWater() {
             return currentWater >= (maxWater / waterProjectileSetAmount);
         }
 
-        private void ShootSeed() {
-            Debug.Log("Firing seed!");
-            Instantiate(currentSeedData.seedPrefab, barrelPoint.position, barrelPoint.rotation);
-            OnSeedProjectile.Invoke(); 
-        }
-
         private bool canShootSeed() {
             return currentSeedData.canFireSeed(); 
+        }
+
+        private void ShootProjectile (GameObject projectile) {
+            Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            RaycastHit hitInfo;
+
+            if(Physics.Raycast(ray, out hitInfo)) {
+                destination = hitInfo.point;
+            } else {
+                destination = ray.GetPoint(1000f);
+            }
+
+            var firedProjectile = Instantiate(projectile, barrelPoint.position, Quaternion.identity) as GameObject;
+            firedProjectile.GetComponent<Rigidbody>().velocity = (destination - barrelPoint.position).normalized * projectileSpeed;
         }
 
         private void EquipSeed(int s_index) {      
