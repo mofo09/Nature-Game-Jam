@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -43,13 +44,36 @@ public class GameManager : MonoBehaviour
             waterAmmo.rectTransform.localScale = Vector3.Lerp(waterAmmo.rectTransform.localScale, targetAmmo, 5f * Time.deltaTime);
         }
 
-        #endregion
+    #endregion
 
-        #region Public Methods
+    #region Public Methods
 
 
 
-        #endregion
-        
-    
+    #endregion
+
+
+    #region Game State
+
+    bool gameHasEnded = false;
+
+    public void GameOver()
+    {
+        if (gameHasEnded == false)
+        { 
+            gameHasEnded = true;
+            Debug.Log("Game Over!");
+
+        }
+
+    }
+
+    void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
+    #endregion
+
 }
