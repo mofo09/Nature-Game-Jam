@@ -128,7 +128,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantToGrow: {fileID: 4143535920475200859, guid: 395ddcde61bf0e943a4794d97efe4caf, type: 3}
-  sphereRadius: 0.2
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 2147483647
+  dirtLayer: 10
