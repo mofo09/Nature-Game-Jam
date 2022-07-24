@@ -8,19 +8,11 @@ public class SeedProjectile : MonoBehaviour
 
         [Header("Projectile Variable Fields - Seed")]
         [SerializeField] GameObject plantToGrow;
+        [SerializeField] int dirtLayer;
 
         Rigidbody rb;
-
-        [Header("Raycast Variable Fields")]
-        [SerializeField] float sphereRadius;
-        [SerializeField] LayerMask layerMask;
-
-        float maxDistance = 2f;
-        float currentHitDistance;
-        Vector3 origin;
-        Vector3 direction;
-        Vector3 spawnPosition;
         Quaternion spawnRotation;
+        int currentLayer;
 
         #endregion
 
@@ -32,28 +24,23 @@ public class SeedProjectile : MonoBehaviour
 
         private void OnCollisionEnter(Collision collision) {
 
-            if(collision.gameObject.tag == "Wall") {
+            if(collision.gameObject.CompareTag("Growth Surface")) {
                 rb.isKinematic = true;
                 spawnRotation = Quaternion.LookRotation(collision.contacts[0].normal);
+                currentLayer = collision.gameObject.layer;
             }
-            
         }
 
         #endregion
 
         #region Private Methods
 
-        private void OnDrawGizmosSelected() {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(origin + direction * currentHitDistance, sphereRadius);
-        }
-
         #endregion
 
         #region Public Methods
 
         public void GrowPlant() {
-            if(plantToGrow != null){
+            if(plantToGrow != null && currentLayer == dirtLayer){
             GameObject plantPrefab = Instantiate(plantToGrow, transform.position, spawnRotation) as GameObject;
             }
             Destroy(gameObject);

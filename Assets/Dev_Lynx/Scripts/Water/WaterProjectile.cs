@@ -16,7 +16,7 @@ public class WaterProjectile : MonoBehaviour
 
         #region MonoBehaviour Callbacks
         void OnCollisionEnter(Collision collision) {
-            if(collision.gameObject.CompareTag("Wall")) {
+            if(collision.gameObject.CompareTag("Growth Surface")) {
                 WaterExplosion();
             }
             
