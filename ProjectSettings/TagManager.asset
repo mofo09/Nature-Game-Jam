@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Growth Surface
+  - Wall
+  - JumpPad
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -13,10 +15,10 @@ TagManager:
   - Water
   - UI
   - Ground
+  - Wall
+  - player
   - 
   - 
-  - Rock
-  - Dirt
   - 
   - 
   - 

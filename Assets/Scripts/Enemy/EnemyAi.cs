@@ -7,7 +7,6 @@ public class EnemyAi : MonoBehaviour
     public NavMeshAgent agent;
 
     public Transform player;
-    public PlayerMovement pla;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -26,7 +25,7 @@ public class EnemyAi : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -38,7 +37,7 @@ public class EnemyAi : MonoBehaviour
 
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        if (playerInSightRange && playerInAttackRange) AttackPlayer();
     }
 
     private void Patroling()
@@ -81,18 +80,15 @@ public class EnemyAi : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            Rigidbody rb; 
+            rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 32.0f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8.0f, ForceMode.Impulse);
+            //rb.AddForce(transform.up * 8.0f, ForceMode.Impulse);
+           
             ///End of attack code
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
-
-            if (player)
-            {
-                pla.TakeDamage(50);
-            }
         }
     }
     private void ResetAttack()
