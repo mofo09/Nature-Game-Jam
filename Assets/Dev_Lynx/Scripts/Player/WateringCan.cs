@@ -75,6 +75,13 @@ public class WateringCan : MonoBehaviour
                 //Debug.Log("Firing seed!");
             }         
     }
+        public void HandleRefill()
+        {
+            if (currentWater < maxWater)
+            {
+                currentWater += waterProjectileSetAmount;
+            }
+        }
 
         private void HandleReload() {
             if(Input.GetKeyDown(KeyCode.X)) {
