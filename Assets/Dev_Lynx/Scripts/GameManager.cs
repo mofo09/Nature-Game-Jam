@@ -63,14 +63,14 @@ public class GameManager : MonoBehaviour
         { 
             gameHasEnded = true;
             Debug.Log("Game Over!");
-
+            Restart();       
         }
 
     }
 
     void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("GameOver");
     }
 
 
